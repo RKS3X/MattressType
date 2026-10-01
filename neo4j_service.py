@@ -20,9 +20,9 @@ from neo4j.exceptions import ConstraintError
 def _config() -> tuple[str, str, str, str | None]:
     cfg = st.secrets["neo4j"]
     return (
-        cfg["neo4j+s://5afbc1ce.databases.neo4j.io"],
-        cfg["5afbc1ce"],
-        cfg["72zwEo56ZOomFQjpqc-L5-QaBuZJ7w5kIaOJ8HeQ8Uk"],
+        cfg["uri"],
+        cfg["username"],
+        cfg["password"],
         cfg.get("database") or None,  # None = ใช้ home database ของ Aura
     )
 
