@@ -442,14 +442,20 @@ elif page == "🕸️ Graph Explorer":
         def q(s: str) -> str:
             return '"' + str(s).replace('"', "'") + '"'
 
-        dot = ["graph G {", 'rankdir="LR";', "node [fontname=Helvetica, fontsize=11];"]
+        # แถวบน = User, แถวล่าง = MattressType เพื่อให้กราฟแผ่เป็นแนวนอน
+        dot = ["graph G {", 'rankdir="TB"; ranksep=1.6; nodesep=0.35;',
+               "node [fontname=Helvetica, fontsize=11];", 'edge [color="#94a3b8"];']
         users_in = sorted({e["user"] for e in edges})
         mats_in = sorted({e["mattress"] for e in edges})
+        dot.append("{ rank=same;")
         for u in users_in:
             color = "#f59e0b" if u == focus else "#bae6fd"
             dot.append(f'{q("U:" + u)} [label={q(u)}, shape=ellipse, style=filled, fillcolor="{color}"];')
+        dot.append("}")
+        dot.append("{ rank=same;")
         for m in mats_in:
             dot.append(f'{q("M:" + m)} [label={q(m)}, shape=box, style="rounded,filled", fillcolor="#bbf7d0"];')
+        dot.append("}")
         for e in edges:
             dot.append(f'{q("U:" + e["user"])} -- {q("M:" + e["mattress"])};')
         dot.append("}")
