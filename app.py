@@ -259,7 +259,7 @@ if page == "🏠 หน้าหลัก":
 # ---------------------------------------------------------------------------
 elif page == "✨ แนะนำที่นอน":
     user = user_selector("rec_user")
-    top_n = st.slider("จำนวนคำแนะนำสูงสุด", 1, 10, 6)
+  
 
     liked = [db.get_mattress(n) for n in db.user_preferences(user)]
     liked = [x for x in liked if x]
